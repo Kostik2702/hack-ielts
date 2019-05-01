@@ -24,4 +24,4 @@ yarn-error.log*
 
 .idea
 .gitsecret/keys/random_seed
-secrets
+secrets/config.json
