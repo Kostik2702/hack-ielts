@@ -1,3 +1,5 @@
+https://git-secret.io/
+
 TODO
 add **git secret hide** to pre commit hook
 
