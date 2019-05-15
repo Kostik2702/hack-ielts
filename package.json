@@ -3,15 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "aws-amplify": "^1.1.13",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0"
+    "react-dom": "^16.5.1",
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "3.0.0",
+    "redux": "^4.0.1",
+    "redux-actions": "^2.6.5",
+    "redux-saga": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "publish": "aws s3 sync build/ s3://hack-ielts-demo"
   },
   "eslintConfig": {
     "extends": "react-app"
