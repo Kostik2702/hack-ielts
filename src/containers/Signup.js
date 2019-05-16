@@ -1,10 +1,4 @@
 import React, { Component } from "react";
-import {
-  HelpBlock,
-  FormGroup,
-  FormControl,
-  ControlLabel
-} from "react-bootstrap";
 import { Auth } from "aws-amplify";
 import FacebookButton from "../components/FacebookButton";
 import "./Signup.css";
@@ -85,16 +79,16 @@ export default class Signup extends Component {
   renderConfirmationForm() {
     return (
       <form onSubmit={this.handleConfirmationSubmit}>
-        <FormGroup controlId="confirmationCode" bsSize="large">
-          <ControlLabel>Confirmation Code</ControlLabel>
-          <FormControl
-            autoFocus
-            type="tel"
-            value={this.state.confirmationCode}
-            onChange={this.handleChange}
-          />
-          <HelpBlock>Please check your email for the code.</HelpBlock>
-        </FormGroup>
+        {/*<FormGroup controlId="confirmationCode" bsSize="large">*/}
+          {/*<ControlLabel>Confirmation Code</ControlLabel>*/}
+          {/*<FormControl*/}
+            {/*autoFocus*/}
+            {/*type="tel"*/}
+            {/*value={this.state.confirmationCode}*/}
+            {/*onChange={this.handleChange}*/}
+          {/*/>*/}
+          {/*<HelpBlock>Please check your email for the code.</HelpBlock>*/}
+        {/*</FormGroup>*/}
         {/*<LoaderButton*/}
           {/*block*/}
           {/*bsSize="large"*/}
@@ -111,35 +105,35 @@ export default class Signup extends Component {
   renderForm() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <FacebookButton
-          onLogin={this.handleFbLogin}
-        />
-        <hr />
-        <FormGroup controlId="email" bsSize="large">
-          <ControlLabel>Email</ControlLabel>
-          <FormControl
-            autoFocus
-            type="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
-            value={this.state.password}
-            onChange={this.handleChange}
-            type="password"
-          />
-        </FormGroup>
-        <FormGroup controlId="confirmPassword" bsSize="large">
-          <ControlLabel>Confirm Password</ControlLabel>
-          <FormControl
-            value={this.state.confirmPassword}
-            onChange={this.handleChange}
-            type="password"
-          />
-        </FormGroup>
+        {/*<FacebookButton*/}
+          {/*onLogin={this.handleFbLogin}*/}
+        {/*/>*/}
+        {/*<hr />*/}
+        {/*<FormGroup controlId="email" bsSize="large">*/}
+          {/*<ControlLabel>Email</ControlLabel>*/}
+          {/*<FormControl*/}
+            {/*autoFocus*/}
+            {/*type="email"*/}
+            {/*value={this.state.email}*/}
+            {/*onChange={this.handleChange}*/}
+          {/*/>*/}
+        {/*</FormGroup>*/}
+        {/*<FormGroup controlId="password" bsSize="large">*/}
+          {/*<ControlLabel>Password</ControlLabel>*/}
+          {/*<FormControl*/}
+            {/*value={this.state.password}*/}
+            {/*onChange={this.handleChange}*/}
+            {/*type="password"*/}
+          {/*/>*/}
+        {/*</FormGroup>*/}
+        {/*<FormGroup controlId="confirmPassword" bsSize="large">*/}
+          {/*<ControlLabel>Confirm Password</ControlLabel>*/}
+          {/*<FormControl*/}
+            {/*value={this.state.confirmPassword}*/}
+            {/*onChange={this.handleChange}*/}
+            {/*type="password"*/}
+          {/*/>*/}
+        {/*</FormGroup>*/}
         {/*<LoaderButton*/}
           {/*block*/}
           {/*bsSize="large"*/}

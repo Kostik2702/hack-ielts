@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import FacebookButton from "../components/FacebookButton";
 import "./Login.css";
 
@@ -46,28 +45,28 @@ export default class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <form onSubmit={this.handleSubmit}>
-          <FacebookButton
-            onLogin={this.handleFbLogin}
-          />
-          <hr />
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
-            <FormControl
-              autoFocus
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-            />
-          </FormGroup>
+        {/*<form onSubmit={this.handleSubmit}>*/}
+          {/*<FacebookButton*/}
+            {/*onLogin={this.handleFbLogin}*/}
+          {/*/>*/}
+          {/*<hr />*/}
+          {/*<FormGroup controlId="email" bsSize="large">*/}
+            {/*<ControlLabel>Email</ControlLabel>*/}
+            {/*<FormControl*/}
+              {/*autoFocus*/}
+              {/*type="email"*/}
+              {/*value={this.state.email}*/}
+              {/*onChange={this.handleChange}*/}
+            {/*/>*/}
+          {/*</FormGroup>*/}
+          {/*<FormGroup controlId="password" bsSize="large">*/}
+            {/*<ControlLabel>Password</ControlLabel>*/}
+            {/*<FormControl*/}
+              {/*value={this.state.password}*/}
+              {/*onChange={this.handleChange}*/}
+              {/*type="password"*/}
+            {/*/>*/}
+          {/*</FormGroup>*/}
           {/*<LoaderButton*/}
             {/*block*/}
             {/*bsSize="large"*/}
@@ -77,7 +76,7 @@ export default class Login extends Component {
             {/*text="Login"*/}
             {/*loadingText="Logging in…"*/}
           {/*/>*/}
-        </form>
+        {/*</form>*/}
       </div>
     );
   }

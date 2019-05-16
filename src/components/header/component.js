@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
+import cn from 'classnames';
 
 import { fetchUserNotes } from '../../ducks/app.duck';
 
@@ -21,7 +22,7 @@ class Header extends PureComponent {
 
 	render() {
 		return (
-			<div>Hello from header</div>
+			<div className={cn('Header', this.props.className)}>Hello from header</div>
 		)
 	}
 }
