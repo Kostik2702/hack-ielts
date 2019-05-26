@@ -1,21 +1,31 @@
-import React, { Component, Fragment } from "react";
-import { Auth, API } from "aws-amplify";
-import { Link, withRouter } from "react-router-dom";
-import Routes from "./Routes";
+import React, { Component } from "react";
+import { Auth } from "aws-amplify";
+import { withRouter } from "react-router-dom";
+import Routes from "./routes/Routes";
 import config from "./secrets/config";
-import "./App.css";
-import Header from './components/header';
+import "./App.scss";
+import Header from './views/header/HeaderContainer';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { updateState } from './ducks/auth.duck'
 
-class App extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      isAuthenticated: false,
-      isAuthenticating: true
-    };
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.app.isAuthenticated,
+    isAuthenticating: state.app.isAuthenticating
+  };
+}
+
+function mapActionsToProps(dispatch) {
+  return {
+    actions: bindActionCreators({ updateState }, dispatch)
   }
+}
 
+
+@connect(mapStateToProps, mapActionsToProps)
+class App extends Component {
   async componentDidMount() {
     this.loadFacebookSDK();
 
@@ -28,7 +38,7 @@ class App extends Component {
       }
     }
 
-    this.setState({ isAuthenticating: false });
+    this.props.actions.updateState({ isAuthenticating: false });
   }
 
   loadFacebookSDK() {
@@ -51,7 +61,7 @@ class App extends Component {
   }
 
   userHasAuthenticated = authenticated => {
-    this.setState({ isAuthenticated: authenticated });
+    this.props.actions.updateState({ isAuthenticated: authenticated });
   };
 
   handleLogout = async event => {
@@ -64,23 +74,15 @@ class App extends Component {
 
   render() {
     const childProps = {
-      isAuthenticated: this.state.isAuthenticated,
+      isAuthenticated: this.props.isAuthenticated,
       userHasAuthenticated: this.userHasAuthenticated
     };
 
     return (
-      !this.state.isAuthenticating && (
+      !this.props.isAuthenticating && (
         <div className="App container">
           <Header />
 
-          {this.state.isAuthenticated ? (
-            <a onClick={this.handleLogout}>Logout</a>
-          ) : (
-            <Fragment>
-              <a href="/signup">Signup</a>
-              <a href="/login">Login</a>
-            </Fragment>
-          )}
           <Routes childProps={childProps} />
         </div>
       )

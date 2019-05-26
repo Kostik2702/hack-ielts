@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
-import appReducer from './ducks/app.duck';
+import authReducer from './ducks/auth.duck';
+import tasksReducer from './views/tasks/tasks.duck';
 
 const rootReducer = combineReducers({
-	app: appReducer,
+	app: authReducer,
+	tasks: tasksReducer,
 });
 
 export default rootReducer;

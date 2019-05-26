@@ -1,0 +1,14 @@
+.App {
+  display: grid;
+  grid-template-columns: none;
+  grid-template-rows: auto;
+  grid-template-areas:
+          "header header header header"
+          "main main main main";
+  width: 100vw;
+  height: 100vh;
+}
+
+.App .navbar-brand {
+  font-weight: bold;
+}

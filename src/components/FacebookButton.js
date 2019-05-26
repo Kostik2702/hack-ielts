@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Auth } from "aws-amplify";
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { updateState, handleFBAuth } from '../ducks/auth.duck'
 
 function waitForInit() {
   return new Promise((res, rej) => {
@@ -14,7 +16,20 @@ function waitForInit() {
   });
 }
 
-export default class FacebookButton extends Component {
+const mapStateToProps = state => {
+  return {
+    writingTasks: state.tasks.writingTasks,
+  };
+}
+
+function mapActionsToProps(dispatch) {
+  return {
+    actions: bindActionCreators({ updateState, handleFBAuth }, dispatch)
+  }
+}
+
+@connect(mapStateToProps, mapActionsToProps)
+class FacebookButton extends Component {
   constructor(props) {
     super(props);
 
@@ -29,10 +44,13 @@ export default class FacebookButton extends Component {
   }
 
   statusChangeCallback = response => {
+    console.log('response.status', response);
+
     if (response.status === "connected") {
-      this.handleResponse(response.authResponse);
+      console.log('response', response);
+      this.props.actions.handleFBAuth(response.authResponse);
     } else {
-      this.handleError(response);
+      alert(response);
     }
   };
 
@@ -44,31 +62,6 @@ export default class FacebookButton extends Component {
     window.FB.login(this.checkLoginState, {scope: "public_profile,email"});
   };
 
-  handleError(error) {
-    alert(error);
-  }
-
-  async handleResponse(data) {
-    const { email, accessToken: token, expiresIn } = data;
-    const expires_at = expiresIn * 1000 + new Date().getTime();
-    const user = { email };
-
-    this.setState({ isLoading: true });
-
-    try {
-      const response = await Auth.federatedSignIn(
-        "facebook",
-        { token, expires_at },
-        user
-      );
-      this.setState({ isLoading: false });
-      this.props.onLogin(response);
-    } catch (e) {
-      this.setState({ isLoading: false });
-      this.handleError(e);
-    }
-  }
-
   render() {
     return (
       <button onClick={this.handleClick}>
@@ -77,3 +70,5 @@ export default class FacebookButton extends Component {
     );
   }
 }
+
+export default FacebookButton;

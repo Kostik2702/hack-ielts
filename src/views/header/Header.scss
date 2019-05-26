@@ -1,0 +1,7 @@
+@import "../../colors";
+
+.Header {
+  background-color: $color-secondary-1-1;
+  grid-area: header;
+  grid-row: 1;
+}

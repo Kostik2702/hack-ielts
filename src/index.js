@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import createSagaMiddleware from 'redux-saga';
 import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 import { Provider } from 'react-redux';
 import Amplify from "aws-amplify";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -51,8 +52,10 @@ const initialState = {};
 export const store = createStore(
 	rootReducer,
 	initialState,
-	applyMiddleware(
-		sagaMiddleware
+	composeWithDevTools(
+		applyMiddleware(
+			sagaMiddleware
+		)
 	)
 );
 
