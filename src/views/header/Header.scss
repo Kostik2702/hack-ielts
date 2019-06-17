@@ -1,7 +1,16 @@
 @import "../../colors";
 
 .Header {
-  background-color: $color-secondary-1-1;
-  grid-area: header;
-  grid-row: 1;
+  height: 60px;
+  width: 100%;
+  background-color: $color-secondary-2-1;
+  position: fixed;
+
+  &__rightSection {
+    height: 100%;
+    float: right;
+    .MenuButton {
+      border: 0;
+    }
+  }
 }

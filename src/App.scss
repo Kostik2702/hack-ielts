@@ -1,12 +1,16 @@
+@import './variables';
+
 .App {
   display: grid;
   grid-template-columns: none;
   grid-template-rows: auto;
-  grid-template-areas:
-          "header header header header"
-          "main main main main";
+  grid-template-areas: "main main main main";
   width: 100vw;
   height: 100vh;
+
+  &__body {
+    padding-top: $header_height;
+  }
 }
 
 .App .navbar-brand {

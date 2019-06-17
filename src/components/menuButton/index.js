@@ -1,14 +1,16 @@
-import React, { Component } from "react";
-import cn from 'classnames'
+import React, { PureComponent } from 'react';
+import cn from 'classnames';
 
 import './MenuButton.scss';
 
-export default class MenuButton extends Component {
+class MenuButton extends PureComponent {
   render() {
     return (
-      <button onClick={this.props.handleClick} className={cn('MenuButton', this.props.className)}>
+      <button type="button" onClick={this.props.onClick} className={cn('MenuButton', this.props.className)}>
         {this.props.label}
       </button>
     );
   }
 }
+
+export default MenuButton;
