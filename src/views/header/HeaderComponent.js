@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import MenuButton from '../../components/menuButton';
 import FacebookButton from '../../components/facebookBtn/FacebookButton';
+import logo from '../../assets/logo.svg';
 
 class HeaderComponent extends PureComponent {
   render() {
@@ -12,15 +13,19 @@ class HeaderComponent extends PureComponent {
     return (
       <div className={cn('Header', this.props.className)}>
 
-        <Link to="/reading">
+        <Link className="Header__link" to="/">
+          <img className="Header__logo" alt="logo" src={logo} />
+        </Link>
+
+        <Link className="Header__link" to="/reading">
           <MenuButton label="Reading" />
         </Link>
 
-        <Link to="/listening">
+        <Link className="Header__link" to="/listening">
           <MenuButton label="Listening" />
         </Link>
 
-        <Link to="/vocabulary">
+        <Link className="Header__link" to="/vocabulary">
           <MenuButton label="Vocabulary" />
         </Link>
 

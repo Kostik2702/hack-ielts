@@ -1,0 +1,31 @@
+@import '../../colors';
+
+.CountrySelector {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__box {
+    height: 8%;
+    padding: 2%;
+    border-radius: 5px;
+    background-color: $color-secondary-1-1;
+  }
+
+  &__ask {
+    padding-bottom: 5px;
+  }
+
+  &__flags {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  &__flag {
+    cursor: pointer;
+    margin: 10px;
+  }
+}

@@ -46,17 +46,17 @@ class FacebookButton extends Component {
       console.log('response', response);
       this.props.actions.handleFBAuth(response.authResponse);
     } else {
-      alert(response);
+      alert(JSON.stringify(response));
     }
-  }
+  };
 
   checkLoginState = () => {
     window.FB.getLoginStatus(this.statusChangeCallback);
-  }
+  };
 
   handleClick = () => {
     window.FB.login(this.checkLoginState, { scope: 'public_profile,email' });
-  }
+  };
 
   render() {
     return (

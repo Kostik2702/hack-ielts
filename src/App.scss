@@ -4,12 +4,25 @@
   display: grid;
   grid-template-columns: none;
   grid-template-rows: auto;
-  grid-template-areas: "main main main main";
   width: 100vw;
   height: 100vh;
+  &--spinner {
+    img {
+    }
+  }
 
   &__body {
-    padding-top: $header_height;
+    margin-top: $header_height;
+  }
+
+  &__overlayContainer {
+    background: rgba(143, 149, 154, 0.7);
+
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
   }
 }
 

@@ -1,0 +1,14 @@
+.NewWord {
+  height: 1%;
+  padding: 2%;
+  display: flex;
+  justify-content: center;
+
+  &__form {
+    display: flex;
+    width: 20%;
+  }
+  &__input {
+    margin-right: 10px;
+  }
+}

@@ -1,16 +1,28 @@
+@import "../../variables";
 @import "../../colors";
 
 .Header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
   height: 60px;
   width: 100%;
-  background-color: $color-secondary-2-1;
+  background-color: $color-secondary-2-2;
   position: fixed;
 
   &__rightSection {
-    height: 100%;
-    float: right;
     .MenuButton {
       border: 0;
     }
+  }
+
+  &__link {
+    display: flex;
+    text-decoration: none;
+  }
+
+  &__logo {
+    height: $header_height - 12px;
+    margin: 6px;
   }
 }

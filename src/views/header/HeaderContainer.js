@@ -22,7 +22,8 @@ function mapActionsToProps(dispatch) {
 class HeaderContainer extends PureComponent {
   handleLogOut = () => {
     this.props.actions.handleLogOut();
-  }
+    // this.props.history.push('/login');
+  };
 
   render() {
     return <HeaderComponent {...this.props} handleLogOut={this.handleLogOut} />;

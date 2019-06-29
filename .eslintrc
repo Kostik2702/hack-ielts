@@ -8,7 +8,10 @@
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prop-types": false,
-    "react/destructuring-assignment": false
+    "react/destructuring-assignment": false,
+    "jsx-a11y/click-events-have-key-events": false,
+    "jsx-a11y/interactive-supports-focus": false,
+    "import/no-extraneous-dependencies": false
   }
 }
 
