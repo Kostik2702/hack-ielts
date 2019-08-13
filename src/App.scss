@@ -29,3 +29,15 @@
 .App .navbar-brand {
   font-weight: bold;
 }
+
+.ReactVirtualized__Grid:focus {
+  outline: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+.kep-login-facebook {
+  height: 100%;
+}

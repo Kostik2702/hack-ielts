@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import cn from 'classnames';
 
 import { Link } from 'react-router-dom';
@@ -13,21 +13,30 @@ class HeaderComponent extends PureComponent {
     return (
       <div className={cn('Header', this.props.className)}>
 
+
         <Link className="Header__link" to="/">
           <img className="Header__logo" alt="logo" src={logo} />
         </Link>
 
-        <Link className="Header__link" to="/reading">
-          <MenuButton label="Reading" />
-        </Link>
+        { isAuthenticated && (
+          <Fragment>
+            <Link className="Header__link" to="/reading">
+              <MenuButton label="Reading" />
+            </Link>
 
-        <Link className="Header__link" to="/listening">
-          <MenuButton label="Listening" />
-        </Link>
+            <Link className="Header__link" to="/listening">
+              <MenuButton label="Listening" />
+            </Link>
 
-        <Link className="Header__link" to="/vocabulary">
-          <MenuButton label="Vocabulary" />
-        </Link>
+            <Link className="Header__link" to="/vocabulary">
+              <MenuButton label="Vocabulary" />
+            </Link>
+
+            <Link className="Header__link" to="/master">
+              <MenuButton label="Master Vocabulary" />
+            </Link>
+          </Fragment>
+        )}
 
         <div className="Header__rightSection">
           { isAuthenticated

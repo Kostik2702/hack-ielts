@@ -12,6 +12,8 @@ import config from './secrets/config';
 import rootReducer from './reducer.root';
 import rootSaga from './saga.root';
 
+import 'react-virtualized/styles.css';
+
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';

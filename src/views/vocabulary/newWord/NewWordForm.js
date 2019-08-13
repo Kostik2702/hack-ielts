@@ -2,7 +2,18 @@ import React, { PureComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import cn from 'classnames';
 
+import Button from '../../../components/button';
+import Input from '../../../components/input/Input';
+
 class NewWordForm extends PureComponent {
+  generateInput = props => (
+    <Input
+      value={props.input.value}
+      placeholder="Find word"
+      onChange={v => props.input.onChange(v)}
+    />
+  );
+
   render() {
     const { pristine, handleSubmit, onSubmit } = this.props;
 
@@ -14,16 +25,12 @@ class NewWordForm extends PureComponent {
         <div className="NewWord__input">
           <Field
             name="word"
-            component="input"
-            type="text"
-            placeholder="Find"
+            component={this.generateInput}
           />
         </div>
         <div className="NewWord__input">
           { !pristine && (
-            <button type="submit">
-              Submit
-            </button>
+            <Button type="submit" label="Add" />
           ) }
         </div>
       </form>

@@ -3,18 +3,38 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import VocabularyComponent from './VocabularyComponent';
-import { fetchVocabulary, addNewWord } from './vocabulary.duck';
+import {
+  fetchVocabulary,
+  addNewWord,
+  openNewWordModal,
+  updateState,
+  deleteWord,
+  playAudio,
+} from './vocabulary.duck';
 
 import './Vocabulary.scss';
 import './list/VocabularyList.scss';
 
 const mapStateToProps = state => ({
   words: state.vocabulary.words,
+  isModalOpen: state.vocabulary.isModalOpen,
+  translation: state.vocabulary.translation,
+  customTranslate: state.vocabulary.customTranslate,
+  loadingAudio: state.vocabulary.loadingAudio,
 });
 
 function mapActionsToProps(dispatch) {
   return {
-    actions: bindActionCreators({ fetchVocabulary, addNewWord }, dispatch),
+    actions: bindActionCreators(
+      {
+        fetchVocabulary,
+        addNewWord,
+        updateState,
+        openNewWordModal,
+        deleteWord,
+        playAudio,
+      }, dispatch,
+    ),
   };
 }
 
@@ -25,7 +45,17 @@ class VocabularyContainer extends PureComponent {
   }
 
   render() {
-    return <VocabularyComponent {...this.props} />;
+    return (
+      <VocabularyComponent
+        handleCloseAddWordModal={() => this.props.actions.updateState(
+          { isModalOpen: false },
+        )}
+        handleOpenAddWordModal={() => this.props.actions.updateState(
+          { isModalOpen: true },
+        )}
+        {...this.props}
+      />
+    );
   }
 }
 

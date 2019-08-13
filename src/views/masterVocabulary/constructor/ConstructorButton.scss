@@ -1,0 +1,11 @@
+@import '../../../colors';
+
+.ConstructorButton {
+  padding: 10px 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+
+  &--wrong {
+    background-color: $color-primary-0;
+  }
+}

@@ -1,3 +1,5 @@
+@import "../../../colors";
+
 .NewWord {
   height: 1%;
   padding: 2%;
@@ -8,7 +10,52 @@
     display: flex;
     width: 20%;
   }
+
   &__input {
     margin-right: 10px;
+  }
+
+  &__translate {
+    &:hover {
+      background-color: rgba(119, 136, 170, 0.24);
+    }
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 0.15);
+  }
+
+  &__customTranslate {
+    display: flex;
+    padding: 20px;
+    justify-content: flex-start;
+
+    .Input {
+      line-height: 48px;
+    }
+    .Button {
+      margin-left: 20px;
+    }
+  }
+
+  .ReactModal__Content {
+    height: 16%;
+    width: 40%;
+    top: 140px !important;
+    left: 300px !important;
+  }
+
+  .ReactModal__Overlay {
+    z-index: 10;
+  }
+}
+
+.ReactModal__Body--open {
+  .NewWord {
+    &__form {
+      z-index: 10;
+    }
   }
 }

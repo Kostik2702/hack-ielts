@@ -9,6 +9,7 @@
   width: 100%;
   background-color: $color-secondary-2-2;
   position: fixed;
+  z-index: 20;
 
   &__rightSection {
     .MenuButton {
