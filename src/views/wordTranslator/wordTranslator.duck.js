@@ -17,15 +17,22 @@ export const checkResult = createAction(CHECK_RESULT);
 export const finishExercise = createAction(FINISH_EXERCISE);
 
 const FINAL_ITERATION = 5;
+const TRANSLATIONS_COUNT = 5;
+const EMPTY_WORD = { word: '' };
+const NO_ITERATIONS = 0;
+const EMPTY = [];
+
+const API_NAME = 'notes';
+const API_PATH = '/vocabulary';
 
 const initialState = {
-  translations: [],
-  exerciseWord: '',
-  translatedWords: [],
-  words: [],
-  iteration: 0,
+  translations: EMPTY,
+  exerciseWord: EMPTY_WORD,
+  translatedWords: EMPTY,
+  words: EMPTY,
+  iteration: NO_ITERATIONS,
   success: false,
-  failure: { word: '' },
+  failure: EMPTY_WORD,
   showMessage: false,
   showExercise: true,
 };
@@ -41,6 +48,23 @@ export default function wordTranslatorReducer(
   }
 }
 
+function addWrongTranslations(words, translationsList) {
+  while (translationsList.length < TRANSLATIONS_COUNT) {
+    const wrongWord = words[Math.floor(Math.random() * words.length)];
+    if (!translationsList.includes(wrongWord.translation)) {
+      translationsList.push(wrongWord.translation);
+    }
+  }
+  return translationsList;
+}
+
+function prepareTranslations(words, word) {
+  let translationsList = [word.translation];
+  translationsList = addWrongTranslations(words, translationsList);
+  translationsList.sort(() => Math.random() - 0.5);
+  return translationsList;
+}
+
 function* isWordTranslatedSaga(word) {
   const translatedWords = yield select(state => state.translator.translatedWords);
   return translatedWords.includes(word);
@@ -54,17 +78,74 @@ function* getRandomWordSaga(words) {
   return word;
 }
 
-function addWrongTranslations(translations, words) {
-  while (translations.length < 5) {
-    const { translation } = words[Math.floor(Math.random() * words.length)].translation;
-    if (translation.includes(translation)) return;
-    translations.push(translation);
+function* isFinalIterationSaga(iteration) {
+  if (iteration < FINAL_ITERATION) {
+    yield put({ type: RUN_EXERCISE });
+  } else {
+    yield put({ type: FINISH_EXERCISE });
   }
+}
+
+function* runExerciseIterationSaga(translationsList, word, iteration) {
+  const currentIteration = iteration + 1;
+  yield put({
+    type: UPDATE_STATE,
+    payload: {
+      translations: translationsList,
+      exerciseWord: word,
+      iteration: currentIteration,
+      showExercise: true,
+      showMessage: false,
+    },
+  });
+}
+
+function* processCorrectAnswerSaga() {
+  const currentTranslatedWords = yield select(state => state.translator.translatedWords);
+  const iterations = yield select(state => state.translator.iteration);
+  currentTranslatedWords.push = yield select(state => state.translator.exerciseWord);
+
+  yield put({
+    type: UPDATE_STATE,
+    payload: {
+      failure: EMPTY_WORD,
+      showMessage: false,
+      translatedWords: currentTranslatedWords,
+    },
+  });
+
+  yield isFinalIterationSaga(iterations);
+}
+
+function* processWrongAnswerSaga(actualTranslation) {
+  yield put({
+    type: UPDATE_STATE,
+    payload: {
+      failure: {
+        word: actualTranslation,
+      },
+    },
+  });
+}
+
+function* finishExerciseSaga() {
+  yield put({
+    type: UPDATE_STATE,
+    payload: {
+      translations: EMPTY,
+      translatedWords: EMPTY,
+      exerciseWord: EMPTY_WORD,
+      iteration: NO_ITERATIONS,
+      success: true,
+      showMessage: true,
+      showExercise: false,
+    },
+  });
 }
 
 export function* getDataSaga() {
   yield put({ type: UPDATE_LOADER, payload: { loading: true } });
-  const response = yield API.get('notes', '/vocabulary');
+  const response = yield API.get(API_NAME, API_PATH);
   if (response.length === 0) {
     return;
   }
@@ -81,79 +162,23 @@ function* runExerciseSaga() {
 
   const words = yield select(state => state.translator.words);
   const word = yield getRandomWordSaga(words);
-  const translationsList = [word.translation];
-  while (translationsList.length < 5) {
-    const wrongWord = words[Math.floor(Math.random() * words.length)];
-    if (!translationsList.includes(wrongWord.translation)) {
-      translationsList.push(wrongWord.translation);
-    }
-  }
-  translationsList.sort(() => Math.random() - 0.5);
+  const translationsList = prepareTranslations(words, word);
+  const currentIteration = yield select(state => state.translator.iteration);
 
-  let currentIteration = yield select(state => state.translator.iteration);
-  currentIteration += 1;
-  yield put({
-    type: UPDATE_STATE,
-    payload: {
-      translations: translationsList,
-      exerciseWord: word,
-      iteration: currentIteration,
-      showExercise: true,
-      showMessage: false,
-    },
-  });
-
+  yield runExerciseIterationSaga(translationsList, word, currentIteration);
   yield put({ type: UPDATE_LOADER, payload: { loading: false } });
 }
 
-function* checkAnswerSaga(selectedTranslation) {
+function* checkAnswerSaga(event) {
   const expectedTranslation = yield select(state => state.translator.exerciseWord.translation);
-  if (expectedTranslation === selectedTranslation.payload) {
-    const currentTranslatedWords = yield select(state => state.translator.translatedWords);
-    const iterations = yield select(state => state.translator.iteration);
-    currentTranslatedWords.push = yield select(state => state.translator.exerciseWord);
-    yield put({
-      type: UPDATE_STATE,
-      payload: {
-        failure: { word: '' },
-        showMessage: false,
-        translatedWords: currentTranslatedWords,
-      },
-    });
+  const actualTranslation = event.payload;
 
-    if (iterations < FINAL_ITERATION) {
-      yield put({ type: RUN_EXERCISE });
-    } else {
-      yield put({ type: FINISH_EXERCISE });
-    }
+  if (expectedTranslation === actualTranslation) {
+    yield processCorrectAnswerSaga();
   } else {
-    yield put({
-      type: UPDATE_STATE,
-      payload: {
-        failure: {
-          word: selectedTranslation.payload,
-        },
-      },
-    });
+    yield processWrongAnswerSaga(actualTranslation);
   }
 }
-
-function* finishExerciseSaga() {
-  yield put({ type: UPDATE_LOADER, payload: { loading: true } });
-  yield put({
-    type: UPDATE_STATE,
-    payload: {
-      translations: [],
-      exerciseWord: '',
-      iteration: 0,
-      success: true,
-      showMessage: true,
-      showExercise: false,
-    },
-  });
-  yield put({ type: UPDATE_LOADER, payload: { loading: false } });
-}
-
 
 export function* watchTranslatorSaga() {
   yield takeEvery(GET_TRANSLATIONS, getDataSaga);

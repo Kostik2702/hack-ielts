@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import './WordTranslator.scss';
-import { Link } from 'react-router-dom';
-import TranslatorButton from '../../components/translatorButton/translatorButton';
-
+import TranslationComponent from './translationComponent/TranslationComponent';
+import ExerciseWordComponent from './exerciseWordComponent/ExerciseWordComponent';
+import SuccessMessageComponent from './successMessageComponent/SuccessMessageComponent';
 
 class WordTranslatorComponent extends PureComponent {
   constructor() {
@@ -16,7 +16,6 @@ class WordTranslatorComponent extends PureComponent {
 
     handleAnswer = (event) => {
       this.setState({ selectedRadio: event.target.value });
-      this.props.checkAnswer(event.target.value);
     };
 
     render() {
@@ -29,18 +28,14 @@ class WordTranslatorComponent extends PureComponent {
         showMessage,
         showExercise,
         runExercise,
+        checkAnswer,
       } = this.props;
 
       return (
         <div className="word-translator">
           {showExercise
             ? (
-              <div className="word-container">
-                <span className="word-title">
-            Word to translate:
-                </span>
-                <span className="word-body">{exerciseWord.word}</span>
-              </div>
+              <ExerciseWordComponent label={exerciseWord.word} />
             ) : ''
                 }
           <div className="word-translations-container">
@@ -48,30 +43,24 @@ class WordTranslatorComponent extends PureComponent {
               {translations.map(item => (
                 failure.word === item
                   ? (
-                    <div className="checkbox-body wrong" key={item}>
-                      <div className="checkbox-label">{item}</div>
-                      <input
-                        type="radio"
-                        name="translation"
-                        className="word-checkbox"
-                        value={item}
-                        checked={this.state.selectedRadio === item}
-                        onChange={this.handleAnswer}
-                      />
-                    </div>
+                    <TranslationComponent
+                      key={item}
+                      translation={item}
+                      wrong
+                      selected={this.state.selectedRadio}
+                      action={checkAnswer}
+                      onChange={this.handleAnswer}
+                    />
                   )
                   : (
-                    <div className="checkbox-body" key={item}>
-                      <div className="checkbox-label">{item}</div>
-                      <input
-                        type="radio"
-                        name="translation"
-                        className="word-checkbox"
-                        value={item}
-                        checked={this.state.selectedRadio === item}
-                        onChange={this.handleAnswer}
-                      />
-                    </div>
+                    <TranslationComponent
+                      key={item}
+                      translation={item}
+                      wrong={false}
+                      selected={this.state.selectedRadio}
+                      action={checkAnswer}
+                      onChange={this.handleAnswer}
+                    />
                   )
               ))}
             </form>
@@ -79,16 +68,7 @@ class WordTranslatorComponent extends PureComponent {
 
           {showMessage
             ? (
-              <div className="alert-block">
-                {success ? <span className="correct">You finished this exercise!</span> : ''}
-                <br />
-                <Link to="/master">
-                  <TranslatorButton label="To master" />
-                </Link>
-
-                <TranslatorButton action={runExercise} label="Run again" />
-
-              </div>
+              <SuccessMessageComponent runAgain={runExercise} success={success} />
             ) : ''}
         </div>
       );

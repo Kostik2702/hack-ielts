@@ -1,0 +1,24 @@
+@import '../../../variables';
+
+.word-container {
+  color: #061639;
+  float: left;
+  height:50px;
+  width:100%;
+  border-bottom:2px solid #d7d7ee;
+  margin-bottom: 5px;
+}
+
+.word-title{
+  font-family: $font;
+  font-weight: 500;
+  float: left;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.word-body {
+  float: left;
+  margin-left: 15px;
+  margin-top: 15px;
+}
