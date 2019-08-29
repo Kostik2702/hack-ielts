@@ -13,7 +13,7 @@ export const fetchConstructorSet = createAction(FETCH_CONSTRUCTOR_SET);
 
 export const units = {
   constructor: 'constructor',
-  'word-translation': 'word-translation',
+  'word-translation': 'translation',
   listening: 'listening',
 };
 

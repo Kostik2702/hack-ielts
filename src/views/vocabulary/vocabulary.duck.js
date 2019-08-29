@@ -45,6 +45,7 @@ export function* fetchVocabularySaga() {
   if (response.length === 0) {
     return;
   }
+
   const diff = (a, b) => b.createdAt - a.createdAt;
   const words = R.sort(diff, response);
 

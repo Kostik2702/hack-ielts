@@ -4,6 +4,7 @@ import Listening from '../views/tasks/listening/ListeningContainer';
 import Reading from '../views/tasks/reading/ReadingContainer';
 import Vocabulary from '../views/vocabulary/VocabularyContainer';
 import Index from '../views/index/Index';
+import WordTranslator from '../views/wordTranslator/WordTranslatorCotainer';
 import NotFound from './NotFound';
 // import AppliedRoute from './AppliedRoute'
 import AuthenticatedRoute from './AuthenticatedRoute';
@@ -21,6 +22,7 @@ export default ({ childProps }) => (
     <AuthenticatedRoute path="/vocabulary" exact component={Vocabulary} props={childProps} />
     <AuthenticatedRoute path="/master" exact component={MasterVocabularyContainer} props={childProps} />
     <AuthenticatedRoute path="/master/:unit" exact component={MasterUnitContainer} props={childProps} />
+    <AuthenticatedRoute path="/translation" exact component={WordTranslator} props={childProps} />
 
     {/* <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} /> */ }
     {/* <UnauthenticatedRoute path="/signup" exact component={Signup} props={childProps} /> */ }

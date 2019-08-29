@@ -1,0 +1,104 @@
+$translator-width:500px;
+$margin-center: 25px auto;
+$font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+.word-translator {
+    width: $translator-width;
+    min-height:200px;
+    margin: $margin-center;
+}
+
+.word-container {
+    color: #061639;
+    float: left;
+    height:50px;
+    width:100%;
+    border-bottom:2px solid #d7d7ee;
+    margin-bottom: 5px;
+}
+
+.word-title{
+    font-family: $font;
+    font-weight: 500;
+    float: left;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.word-body {
+    float: left;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.word-translations-container {
+    float: left;
+    width:100%;
+}
+
+.word-translations-container form {
+    margin:0 auto;
+    width:100%;
+}
+
+.checkbox-body {
+    color: #061639;
+    margin-bottom: 5px;
+    width:100%;
+    height: 50px;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+.checkbox-body:hover, .wrong {
+    background-color: #C0C0C0;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    border:2px solid #d7d7ee;
+}
+
+.wrong {
+    background-color: #AA3939!important;
+    color: azure;
+}
+
+.correct {
+    color: azure;
+}
+
+.checkbox-label{
+    min-width: 50px;
+    font-family: $font;
+    float: left;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.word-checkbox{
+    float: right;
+    margin-right: 15px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.alert-block {
+    width:100%;
+    min-height:50px;
+    background-color:#10e670;
+    float: left;
+    text-align: center;
+    padding-top: 25px;
+    border-radius:14px 14px 14px 14px;
+    -moz-border-radius:14px 14px 14px 14px;
+    -webkit-border-radius:14px 14px 14px 14px;
+    border:2px solid #95f08c;
+}
+
+

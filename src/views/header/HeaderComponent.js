@@ -18,28 +18,28 @@ class HeaderComponent extends PureComponent {
           <img className="Header__logo" alt="logo" src={logo} />
         </Link>
 
-        { isAuthenticated && (
-          <Fragment>
-            <Link className="Header__link" to="/reading">
-              <MenuButton label="Reading" />
-            </Link>
+        {isAuthenticated && (
+        <Fragment>
+          <Link className="Header__link" to="/reading">
+            <MenuButton label="Reading" />
+          </Link>
 
-            <Link className="Header__link" to="/listening">
-              <MenuButton label="Listening" />
-            </Link>
+          <Link className="Header__link" to="/listening">
+            <MenuButton label="Listening" />
+          </Link>
 
-            <Link className="Header__link" to="/vocabulary">
-              <MenuButton label="Vocabulary" />
-            </Link>
+          <Link className="Header__link" to="/vocabulary">
+            <MenuButton label="Vocabulary" />
+          </Link>
 
-            <Link className="Header__link" to="/master">
-              <MenuButton label="Master Vocabulary" />
-            </Link>
-          </Fragment>
+          <Link className="Header__link" to="/master">
+            <MenuButton label="Master Vocabulary" />
+          </Link>
+        </Fragment>
         )}
 
         <div className="Header__rightSection">
-          { isAuthenticated
+          {isAuthenticated
             ? (
               <MenuButton onClick={this.props.handleLogOut} label="Log out" />
             )
@@ -47,7 +47,7 @@ class HeaderComponent extends PureComponent {
 
               <FacebookButton />
             )
-          }
+                    }
         </div>
 
       </div>
