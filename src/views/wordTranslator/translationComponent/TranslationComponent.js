@@ -18,12 +18,12 @@ class TranslationComponent extends React.PureComponent {
     return (
       <div
         role="button"
-        className={cn('checkbox-body',
-          (wrong ? 'checkbox-body--wrong' : ''),
-          (showAnswers && rightAnswer ? 'checkbox-body--success' : ''))}
+        className={cn('CheckboxBody',
+          (wrong ? 'CheckboxBody--wrong' : ''),
+          (showAnswers && rightAnswer ? 'CheckboxBody--success' : ''))}
         onClick={this.handleAnswer}
       >
-        <div className="checkbox-body__checkbox-label">{translation}</div>
+        <div className="CheckboxBody__CheckboxLabel">{translation}</div>
       </div>
     );
   }

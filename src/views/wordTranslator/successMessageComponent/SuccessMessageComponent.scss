@@ -1,6 +1,6 @@
 @import '../../../variables';
 
-.alert-block {
+.AlertBlock {
   width:100%;
   min-height:50px;
   float: left;
@@ -9,7 +9,7 @@
   border: 2px solid rgba(55, 56, 60, 0.16);
   border-radius: 10px;
 
-  &__correct {
+  &--correct {
     color: #152A55;
   }
 }

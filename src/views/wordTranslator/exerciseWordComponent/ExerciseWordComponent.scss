@@ -1,6 +1,6 @@
 @import '../../../variables';
 
-.word-container {
+.WordContainer {
   color: #061639;
   float: left;
   min-height:40px;
@@ -8,14 +8,14 @@
   border-bottom:2px solid #d7d7ee;
   margin-bottom: 5px;
 
-  &__word-title{
+  &__title{
     font-family: $font;
     font-weight: 500;
     margin-left: 15px;
     margin-top: 15px;
   }
 
-  &__word-body {
+  &__WordBody {
     margin-left: 15px;
     margin-top: 15px;
   }

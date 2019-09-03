@@ -8,11 +8,11 @@ class ExerciseWordComponent extends React.PureComponent {
     const { label } = this.props;
     return (
 
-      <div className="word-container">
-        <span className="word-container__word-title">
+      <div className="WordContainer">
+        <span className="WordContainer__title">
           {PREFIX_TEXT}
         </span>
-        <span className="word-container__word-body">{label}</span>
+        <span className="WordContainer__WordBody">{label}</span>
       </div>
     );
   }

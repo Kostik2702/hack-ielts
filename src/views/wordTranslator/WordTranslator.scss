@@ -1,11 +1,11 @@
 @import '../../variables';
 
-.word-translator {
+.WordTranslator {
     width: $translator-width;
     min-height:200px;
     margin: $margin-center;
 
-    &__word-translations-container {
+    &__WordTranslationsContainer {
         float: left;
         width:100%;
 

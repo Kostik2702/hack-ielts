@@ -5,7 +5,7 @@ class TranslatorButton extends React.PureComponent {
   render() {
     const { label, action } = this.props;
     return (
-      <button onClick={action} className="translator-button">{label}</button>
+      <button onClick={action} className="TranslatorButton">{label}</button>
     );
   }
 }

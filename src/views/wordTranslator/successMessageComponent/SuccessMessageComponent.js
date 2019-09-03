@@ -8,8 +8,8 @@ class SuccessMessageComponent extends React.PureComponent {
     const { runAgain, success } = this.props;
 
     return (
-      <div className="alert-block">
-        {success ? <span className="alert-block__correct">You finished this exercise!</span> : ''}
+      <div className="AlertBlock">
+        {success ? <span className="AlertBlock--correct">You finished this exercise!</span> : ''}
         <br />
         <Link to="/master">
           <TranslatorButton label="To master" />

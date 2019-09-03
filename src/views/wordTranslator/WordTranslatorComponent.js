@@ -36,14 +36,14 @@ class WordTranslatorComponent extends PureComponent {
       }
 
       return (
-        <div className="word-translator">
+        <div className="WordTranslator">
           {showExercise
             ? (
               <ExerciseWordComponent label={exerciseWord.word} />
             ) : ''
                 }
-          <div className="word-translator__word-translations-container">
-            <form className="word-translator__word-translations-container__form">
+          <div className="WordTranslator__WordTranslationsContainer">
+            <form className="WordTranslator__WordTranslationsContainer__form">
               {translations.map(item => (
                 failure.word === item
                   ? (

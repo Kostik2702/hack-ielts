@@ -1,6 +1,6 @@
 @import '../../../variables';
 
-.checkbox-body {
+.CheckboxBody {
   color: #FFFFFF;
   margin-bottom: 10px;
   width: 100%;
@@ -27,7 +27,7 @@
     background-color: rgba(38, 177, 10, 0.84) !important;
   }
 
-  &__checkbox-label {
+  &__CheckboxLabel {
     min-width: 50px;
     font-family: $font;
     float: left;
