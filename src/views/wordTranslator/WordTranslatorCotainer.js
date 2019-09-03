@@ -20,6 +20,7 @@ const mapStateToProps = state => ({
   iteration: state.translator.iteration,
   showMessage: state.translator.showMessage,
   showExercise: state.translator.showExercise,
+  showAnswers: state.translator.showAnswers,
 });
 
 function mapActionsToProps(dispatch) {

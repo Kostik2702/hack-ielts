@@ -1,18 +1,17 @@
 @import '../../../variables';
 
-.correct {
-  color: azure;
-}
-
 .alert-block {
   width:100%;
   min-height:50px;
-  background-color:#10e670;
   float: left;
   text-align: center;
   padding-top: 25px;
-  border-radius:14px 14px 14px 14px;
-  -moz-border-radius:14px 14px 14px 14px;
-  -webkit-border-radius:14px 14px 14px 14px;
-  border:2px solid #95f08c;
+  border: 2px solid rgba(55, 56, 60, 0.16);
+  border-radius: 10px;
+
+  &__correct {
+    color: #152A55;
+  }
 }
+
+

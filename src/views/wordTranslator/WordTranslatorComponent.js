@@ -14,12 +14,11 @@ class WordTranslatorComponent extends PureComponent {
       if (this.props.failure.word === '') this.setState({ selectedRadio: null });
     };
 
-    handleAnswer = (event) => {
-      this.setState({ selectedRadio: event.target.value });
+    handleAnswer = (translation) => {
+      this.setState({ selectedRadio: translation });
     };
 
     render() {
-      this.reset();
       const {
         exerciseWord,
         translations,
@@ -29,7 +28,12 @@ class WordTranslatorComponent extends PureComponent {
         showExercise,
         runExercise,
         checkAnswer,
+        showAnswers,
       } = this.props;
+
+      if (!showAnswers) {
+        this.reset();
+      }
 
       return (
         <div className="word-translator">
@@ -38,8 +42,8 @@ class WordTranslatorComponent extends PureComponent {
               <ExerciseWordComponent label={exerciseWord.word} />
             ) : ''
                 }
-          <div className="word-translations-container">
-            <form>
+          <div className="word-translator__word-translations-container">
+            <form className="word-translator__word-translations-container__form">
               {translations.map(item => (
                 failure.word === item
                   ? (
@@ -60,6 +64,7 @@ class WordTranslatorComponent extends PureComponent {
                       selected={this.state.selectedRadio}
                       action={checkAnswer}
                       onChange={this.handleAnswer}
+                      showAnswers={showAnswers}
                     />
                   )
               ))}

@@ -1,5 +1,7 @@
 import { createAction } from 'redux-actions';
-import { takeEvery, put, select } from 'redux-saga/effects';
+import {
+  takeEvery, put, select, delay,
+} from 'redux-saga/effects';
 import { API } from 'aws-amplify';
 import * as R from 'ramda';
 import { UPDATE_LOADER } from '../../ducks/app.duck';
@@ -25,6 +27,8 @@ const EMPTY = [];
 const API_NAME = 'notes';
 const API_PATH = '/vocabulary';
 
+const CORRECT_ANSWER_DELAY = 1000;
+
 const initialState = {
   translations: EMPTY,
   exerciseWord: EMPTY_WORD,
@@ -35,6 +39,7 @@ const initialState = {
   failure: EMPTY_WORD,
   showMessage: false,
   showExercise: true,
+  showAnswers: false,
 };
 
 export default function wordTranslatorReducer(
@@ -63,6 +68,15 @@ function prepareTranslations(words, word) {
   translationsList = addWrongTranslations(words, translationsList);
   translationsList.sort(() => Math.random() - 0.5);
   return translationsList;
+}
+
+function* displayAnswersSaga() {
+  yield put({
+    type: UPDATE_STATE,
+    payload: {
+      showAnswers: true,
+    },
+  });
 }
 
 function* isWordTranslatedSaga(word) {
@@ -96,6 +110,7 @@ function* runExerciseIterationSaga(translationsList, word, iteration) {
       iteration: currentIteration,
       showExercise: true,
       showMessage: false,
+      showAnswers: false,
     },
   });
 }
@@ -114,6 +129,8 @@ function* processCorrectAnswerSaga() {
     },
   });
 
+  yield displayAnswersSaga();
+  yield delay(CORRECT_ANSWER_DELAY);
   yield isFinalIterationSaga(iterations);
 }
 

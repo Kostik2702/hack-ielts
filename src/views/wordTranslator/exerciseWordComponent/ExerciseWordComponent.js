@@ -9,10 +9,10 @@ class ExerciseWordComponent extends React.PureComponent {
     return (
 
       <div className="word-container">
-        <span className="word-title">
+        <span className="word-container__word-title">
           {PREFIX_TEXT}
         </span>
-        <span className="word-body">{label}</span>
+        <span className="word-container__word-body">{label}</span>
       </div>
     );
   }

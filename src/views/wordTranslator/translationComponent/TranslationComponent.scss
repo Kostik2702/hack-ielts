@@ -1,44 +1,43 @@
 @import '../../../variables';
 
 .checkbox-body {
-  color: #061639;
-  margin-bottom: 5px;
-  width:100%;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+  width: 100%;
   height: 50px;
+  border: 2px solid rgba(55, 56, 60, 0.16);
+  border-radius: 4px;
+  background-color: #2E4372;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+  }
+
+  &--wrong {
+    background-color: #AA3939 !important;
+    color: azure;
+  }
+
+  &--success {
+    background-color: rgba(38, 177, 10, 0.84) !important;
+  }
+
+  &__checkbox-label {
+    min-width: 50px;
+    font-family: $font;
+    float: left;
+    margin-left: 15px;
+    margin-top: 15px;
+  }
 }
 
-.checkbox-body:hover, .wrong {
-  background-color: #C0C0C0;
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
-  -webkit-transition: all 0.4s ease-in-out;
-  -moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
-  border:2px solid #d7d7ee;
-}
 
-.wrong {
-  background-color: #AA3939!important;
-  color: azure;
-}
 
-.checkbox-label{
-  min-width: 50px;
-  font-family: $font;
-  float: left;
-  margin-left: 15px;
-  margin-top: 15px;
-}
 
-.word-checkbox{
-  float: right;
-  margin-right: 15px;
-  margin-top: 15px;
-  cursor: pointer;
-}
+
+

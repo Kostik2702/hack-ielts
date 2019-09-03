@@ -3,22 +3,23 @@
 .word-container {
   color: #061639;
   float: left;
-  height:50px;
+  min-height:40px;
   width:100%;
   border-bottom:2px solid #d7d7ee;
   margin-bottom: 5px;
+
+  &__word-title{
+    font-family: $font;
+    font-weight: 500;
+    margin-left: 15px;
+    margin-top: 15px;
+  }
+
+  &__word-body {
+    margin-left: 15px;
+    margin-top: 15px;
+  }
 }
 
-.word-title{
-  font-family: $font;
-  font-weight: 500;
-  float: left;
-  margin-left: 15px;
-  margin-top: 15px;
-}
 
-.word-body {
-  float: left;
-  margin-left: 15px;
-  margin-top: 15px;
-}
+

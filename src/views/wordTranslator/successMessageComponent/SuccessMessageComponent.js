@@ -9,7 +9,7 @@ class SuccessMessageComponent extends React.PureComponent {
 
     return (
       <div className="alert-block">
-        {success ? <span className="correct">You finished this exercise!</span> : ''}
+        {success ? <span className="alert-block__correct">You finished this exercise!</span> : ''}
         <br />
         <Link to="/master">
           <TranslatorButton label="To master" />
