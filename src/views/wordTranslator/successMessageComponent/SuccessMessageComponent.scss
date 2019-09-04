@@ -1,0 +1,17 @@
+@import '../../../variables';
+
+.AlertBlock {
+  width:100%;
+  min-height:50px;
+  float: left;
+  text-align: center;
+  padding-top: 25px;
+  border: 2px solid rgba(55, 56, 60, 0.16);
+  border-radius: 10px;
+
+  &--correct {
+    color: #152A55;
+  }
+}
+
+

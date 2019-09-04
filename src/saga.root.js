@@ -4,6 +4,7 @@ import { watchAppSagas } from './ducks/app.duck';
 import { watchTasksSagas } from './views/tasks/tasks.duck';
 import { watchVocabularySagas } from './views/vocabulary/vocabulary.duck';
 import { watchMasterSagas } from './views/masterVocabulary/master.duck';
+import { watchTranslatorSaga } from './views/wordTranslator/wordTranslator.duck';
 
 export default function* rootSaga() {
   yield fork(watchAuthSagas);
@@ -11,4 +12,5 @@ export default function* rootSaga() {
   yield fork(watchVocabularySagas);
   yield fork(watchAppSagas);
   yield fork(watchMasterSagas);
+  yield fork(watchTranslatorSaga);
 }

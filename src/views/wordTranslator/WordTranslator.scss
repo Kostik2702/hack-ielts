@@ -1,0 +1,21 @@
+@import '../../variables';
+
+.WordTranslator {
+    width: $translator-width;
+    min-height:200px;
+    margin: $margin-center;
+
+    &__WordTranslationsContainer {
+        float: left;
+        width:100%;
+
+        &__form {
+            margin:0 auto;
+            width:100%;
+        }
+    }
+}
+
+
+
+
