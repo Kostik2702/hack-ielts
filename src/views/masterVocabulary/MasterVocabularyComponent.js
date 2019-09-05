@@ -24,6 +24,11 @@ class MasterVocabularyComponent extends PureComponent {
           </Link>
         </div>
         <div className="MasterVocabulary__box">
+          <Link to="/writing">
+            <Button label="Writing" />
+          </Link>
+        </div>
+        <div className="MasterVocabulary__box">
           <Button label="Listening" />
         </div>
         {/*

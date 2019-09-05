@@ -1,0 +1,20 @@
+@import '../../../variables';
+
+.WordBox {
+  width:100%;
+  min-height: 50px;
+  text-align: left;
+  border-bottom:2px solid #d7d7ee;
+
+  &__prefix {
+    float: left;
+    text-align: left;
+    padding: 15px;
+    font-weight: 600;
+  }
+
+  &__word {
+    float: right;
+    padding: 15px;
+  }
+}
