@@ -11,12 +11,17 @@ const GET_TRANSLATIONS = 'translator/GET_TRANSLATIONS';
 const RUN_EXERCISE = 'translator/RUN_EXERCISE';
 const CHECK_RESULT = 'translator/CHECK_RESULT';
 const FINISH_EXERCISE = 'translator/FINISH_EXERCISE';
+const SWITCH_TO_RUSSIAN = 'translator/SWITCH_TO_RUSSIAN';
+const SWITCH_TO_ENGLISH = 'translator/SWITCH_TO_RUSSIAN';
 
 export const updateState = createAction(UPDATE_STATE);
 export const getTranslationsData = createAction(GET_TRANSLATIONS);
 export const runExercise = createAction(RUN_EXERCISE);
 export const checkResult = createAction(CHECK_RESULT);
 export const finishExercise = createAction(FINISH_EXERCISE);
+export const switchToRussian = createAction(SWITCH_TO_RUSSIAN);
+export const switchToEnglish = createAction(SWITCH_TO_ENGLISH);
+
 
 const FINAL_ITERATION = 5;
 const TRANSLATIONS_COUNT = 5;
@@ -28,6 +33,8 @@ const API_NAME = 'notes';
 const API_PATH = '/vocabulary';
 
 const CORRECT_ANSWER_DELAY = 1000;
+const ENGLISH_TO_RUSSIAN = true;
+const RUSSIAN_TO_ENGLISH = false;
 
 const initialState = {
   translations: EMPTY,
@@ -40,6 +47,7 @@ const initialState = {
   showMessage: false,
   showExercise: true,
   showAnswers: false,
+  translationWay: RUSSIAN_TO_ENGLISH,
 };
 
 export default function wordTranslatorReducer(
@@ -53,21 +61,49 @@ export default function wordTranslatorReducer(
   }
 }
 
-function addWrongTranslations(words, translationsList) {
+function addWrongTranslations(words, translationsList, translationWay) {
   while (translationsList.length < TRANSLATIONS_COUNT) {
     const wrongWord = words[Math.floor(Math.random() * words.length)];
-    if (!translationsList.includes(wrongWord.translation)) {
-      translationsList.push(wrongWord.translation);
+    if (translationWay === RUSSIAN_TO_ENGLISH) {
+      if (!translationsList.includes(wrongWord.translation)) {
+        translationsList.push(wrongWord.translation);
+      }
+    } else if (!translationsList.includes(wrongWord.word)) {
+      translationsList.push(wrongWord.word);
     }
   }
   return translationsList;
 }
 
-function prepareTranslations(words, word) {
-  let translationsList = [word.translation];
-  translationsList = addWrongTranslations(words, translationsList);
+function* prepareTranslationsSaga(words, word) {
+  const translationWay = yield select(state => state.translator.translationWay);
+  let translationsList = [];
+  if (translationWay === RUSSIAN_TO_ENGLISH) {
+    translationsList.push(word.translation);
+  } else {
+    translationsList.push(word.word);
+  }
+  translationsList = addWrongTranslations(words, translationsList, translationWay);
   translationsList.sort(() => Math.random() - 0.5);
   return translationsList;
+}
+
+function* switchTranslationToEnglishSaga() {
+  yield put({
+    type: UPDATE_STATE,
+    payload: {
+      translationWay: RUSSIAN_TO_ENGLISH,
+    },
+  });
+}
+
+function* switchTranslationToRussianSaga() {
+  yield put({
+    type: UPDATE_STATE,
+    payload: {
+      translationWay: ENGLISH_TO_RUSSIAN,
+    },
+  });
 }
 
 function* displayAnswersSaga() {
@@ -179,7 +215,7 @@ function* runExerciseSaga() {
 
   const words = yield select(state => state.translator.words);
   const word = yield getRandomWordSaga(words);
-  const translationsList = prepareTranslations(words, word);
+  const translationsList = yield prepareTranslationsSaga(words, word);
   const currentIteration = yield select(state => state.translator.iteration);
 
   yield runExerciseIterationSaga(translationsList, word, currentIteration);
@@ -187,7 +223,14 @@ function* runExerciseSaga() {
 }
 
 function* checkAnswerSaga(event) {
-  const expectedTranslation = yield select(state => state.translator.exerciseWord.translation);
+  const translationWay = yield select(state => state.translator.translationWay);
+  let expectedTranslation;
+  if (translationWay === RUSSIAN_TO_ENGLISH) {
+    expectedTranslation = yield select(state => state.translator.exerciseWord.translation);
+  } else {
+    expectedTranslation = yield select(state => state.translator.exerciseWord.word);
+  }
+
   const actualTranslation = event.payload;
 
   if (expectedTranslation === actualTranslation) {
@@ -202,4 +245,6 @@ export function* watchTranslatorSaga() {
   yield takeEvery(RUN_EXERCISE, runExerciseSaga);
   yield takeEvery(CHECK_RESULT, checkAnswerSaga);
   yield takeEvery(FINISH_EXERCISE, finishExerciseSaga);
+  yield takeEvery(SWITCH_TO_ENGLISH, switchTranslationToEnglishSaga);
+  yield takeEvery(SWITCH_TO_RUSSIAN, switchTranslationToRussianSaga);
 }

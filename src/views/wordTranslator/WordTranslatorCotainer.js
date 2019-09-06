@@ -8,6 +8,8 @@ import {
   runExercise,
   updateState,
   checkResult,
+  switchToEnglish,
+  switchToRussian,
 } from './wordTranslator.duck';
 
 const mapStateToProps = state => ({
@@ -21,6 +23,7 @@ const mapStateToProps = state => ({
   showMessage: state.translator.showMessage,
   showExercise: state.translator.showExercise,
   showAnswers: state.translator.showAnswers,
+  translationWay: state.translator.translationWay,
 });
 
 function mapActionsToProps(dispatch) {
@@ -31,6 +34,8 @@ function mapActionsToProps(dispatch) {
         runExercise,
         updateState,
         checkResult,
+        switchToEnglish,
+        switchToRussian,
       }, dispatch,
     ),
   };
@@ -47,6 +52,8 @@ class WordTranslatorContainer extends PureComponent {
       <WordTranslatorComponent
         checkAnswer={this.props.actions.checkResult}
         runExercise={this.props.actions.runExercise}
+        switchToEnglish={this.props.actions.switchToEnglish}
+        switchToRussian={this.props.actions.switchToRussian}
         {...this.props}
       />
     );

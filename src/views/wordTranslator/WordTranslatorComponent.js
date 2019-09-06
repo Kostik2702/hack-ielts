@@ -4,6 +4,11 @@ import TranslationComponent from './translationComponent/TranslationComponent';
 import ExerciseWordComponent from './exerciseWordComponent/ExerciseWordComponent';
 import SuccessMessageComponent from './successMessageComponent/SuccessMessageComponent';
 
+const ENGLISH_TO_RUSSIAN = true;
+const RUSSIAN_TO_ENGLISH = false;
+const TO_RUSSIAN_SUFFIX = 'russian';
+const TO_ENGLISH_SUFFIX = 'english';
+
 class WordTranslatorComponent extends PureComponent {
   constructor() {
     super();
@@ -19,6 +24,7 @@ class WordTranslatorComponent extends PureComponent {
     };
 
     render() {
+      const { unit } = this.props.match.params;
       const {
         exerciseWord,
         translations,
@@ -29,17 +35,32 @@ class WordTranslatorComponent extends PureComponent {
         runExercise,
         checkAnswer,
         showAnswers,
+        translationWay,
+        switchToEnglish,
+        switchToRussian,
       } = this.props;
 
       if (!showAnswers) {
         this.reset();
       }
 
+      if (unit === TO_ENGLISH_SUFFIX && translationWay !== RUSSIAN_TO_ENGLISH) {
+        switchToEnglish();
+      }
+
+      if (unit === TO_RUSSIAN_SUFFIX && translationWay !== ENGLISH_TO_RUSSIAN) {
+        switchToRussian();
+      }
+
       return (
         <div className="WordTranslator">
           {showExercise
             ? (
-              <ExerciseWordComponent label={exerciseWord.word} />
+              <ExerciseWordComponent
+                label={translationWay
+                  ? exerciseWord.translation
+                  : exerciseWord.word}
+              />
             ) : ''
                 }
           <div className="WordTranslator__WordTranslationsContainer">
