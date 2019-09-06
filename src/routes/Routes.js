@@ -13,7 +13,6 @@ import MasterVocabularyContainer
   from '../views/masterVocabulary/MasterVocabularyContainer';
 import MasterUnitContainer
   from '../views/masterVocabulary/masterUnit/MasterUnitContainer';
-import WritingTranslatorContainer from '../views/writingWordTranslator/WritingTranslatorContainer';
 
 export default ({ childProps }) => (
   <Switch>
@@ -24,7 +23,6 @@ export default ({ childProps }) => (
     <AuthenticatedRoute path="/master" exact component={MasterVocabularyContainer} props={childProps} />
     <AuthenticatedRoute path="/master/:unit" exact component={MasterUnitContainer} props={childProps} />
     <AuthenticatedRoute path="/translation/exercise/:unit" exact component={WordTranslator} props={childProps} />
-    <AuthenticatedRoute path="/writing" exact component={WritingTranslatorContainer} props={childProps} />
 
     {/* <UnauthenticatedRoute path="/login" exact component={Login} props={childProps} /> */ }
     {/* <UnauthenticatedRoute path="/signup" exact component={Signup} props={childProps} /> */ }
