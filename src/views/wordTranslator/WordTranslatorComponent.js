@@ -8,6 +8,9 @@ const ENGLISH_TO_RUSSIAN = true;
 const RUSSIAN_TO_ENGLISH = false;
 const TO_RUSSIAN_SUFFIX = 'russian';
 const TO_ENGLISH_SUFFIX = 'english';
+const NO_TRANSLATION = 0;
+
+const keyCodes = [49, 50, 51, 52, 53];
 
 class WordTranslatorComponent extends PureComponent {
   constructor() {
@@ -16,7 +19,11 @@ class WordTranslatorComponent extends PureComponent {
   }
 
     reset = () => {
-      if (this.props.failure.word === '') this.setState({ selectedRadio: null });
+      if (this.props.failure.word === '') {
+        this.setState({
+          selectedRadio: null,
+        });
+      }
     };
 
     handleAnswer = (translation) => {
@@ -24,6 +31,7 @@ class WordTranslatorComponent extends PureComponent {
     };
 
     render() {
+      const translationNumber = NO_TRANSLATION;
       const { unit } = this.props.match.params;
       const {
         exerciseWord,
@@ -65,7 +73,7 @@ class WordTranslatorComponent extends PureComponent {
                 }
           <div className="WordTranslator__WordTranslationsContainer">
             <form className="WordTranslator__WordTranslationsContainer__form">
-              {translations.map(item => (
+              {translations.map((item, index) => (
                 failure.word === item
                   ? (
                     <TranslationComponent
@@ -75,6 +83,8 @@ class WordTranslatorComponent extends PureComponent {
                       selected={this.state.selectedRadio}
                       action={checkAnswer}
                       onChange={this.handleAnswer}
+                      translationNumber={index + 1}
+                      keyCode={keyCodes[index]}
                     />
                   )
                   : (
@@ -86,6 +96,8 @@ class WordTranslatorComponent extends PureComponent {
                       action={checkAnswer}
                       onChange={this.handleAnswer}
                       showAnswers={showAnswers}
+                      translationNumber={index + 1}
+                      keyCode={keyCodes[index]}
                     />
                   )
               ))}
