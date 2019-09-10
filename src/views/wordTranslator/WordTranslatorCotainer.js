@@ -8,8 +8,7 @@ import {
   runExercise,
   updateState,
   checkResult,
-  switchToEnglish,
-  switchToRussian,
+  finishExercise,
 } from './wordTranslator.duck';
 
 const mapStateToProps = state => ({
@@ -26,6 +25,12 @@ const mapStateToProps = state => ({
   translationWay: state.translator.translationWay,
 });
 
+const TO_RUSSIAN_SUFFIX = 'russian';
+const TO_ENGLISH_SUFFIX = 'english';
+
+const ENGLISH_TO_RUSSIAN = true;
+const RUSSIAN_TO_ENGLISH = false;
+
 function mapActionsToProps(dispatch) {
   return {
     actions: bindActionCreators(
@@ -34,8 +39,7 @@ function mapActionsToProps(dispatch) {
         runExercise,
         updateState,
         checkResult,
-        switchToEnglish,
-        switchToRussian,
+        finishExercise,
       }, dispatch,
     ),
   };
@@ -44,7 +48,8 @@ function mapActionsToProps(dispatch) {
 @connect(mapStateToProps, mapActionsToProps)
 class WordTranslatorContainer extends PureComponent {
   componentDidMount() {
-    this.props.actions.getTranslationsData();
+    const { unit } = this.props.match.params;
+    this.props.actions.getTranslationsData(unit);
   }
 
   render() {
@@ -52,8 +57,6 @@ class WordTranslatorContainer extends PureComponent {
       <WordTranslatorComponent
         checkAnswer={this.props.actions.checkResult}
         runExercise={this.props.actions.runExercise}
-        switchToEnglish={this.props.actions.switchToEnglish}
-        switchToRussian={this.props.actions.switchToRussian}
         {...this.props}
       />
     );

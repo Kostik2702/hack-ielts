@@ -4,10 +4,7 @@ import TranslationComponent from './translationComponent/TranslationComponent';
 import ExerciseWordComponent from './exerciseWordComponent/ExerciseWordComponent';
 import SuccessMessageComponent from './successMessageComponent/SuccessMessageComponent';
 
-const ENGLISH_TO_RUSSIAN = true;
-const RUSSIAN_TO_ENGLISH = false;
-const TO_RUSSIAN_SUFFIX = 'russian';
-const TO_ENGLISH_SUFFIX = 'english';
+
 const NO_TRANSLATION = 0;
 
 const keyCodes = [49, 50, 51, 52, 53];
@@ -18,13 +15,13 @@ class WordTranslatorComponent extends PureComponent {
     this.state = { selectedRadio: null };
   }
 
-    reset = () => {
-      if (this.props.failure.word === '') {
-        this.setState({
-          selectedRadio: null,
-        });
-      }
-    };
+  reset = () => {
+    if (this.props.failure.word === '') {
+      this.setState({
+        selectedRadio: null,
+      });
+    }
+  };
 
     handleAnswer = (translation) => {
       this.setState({ selectedRadio: translation });
@@ -44,20 +41,10 @@ class WordTranslatorComponent extends PureComponent {
         checkAnswer,
         showAnswers,
         translationWay,
-        switchToEnglish,
-        switchToRussian,
       } = this.props;
 
       if (!showAnswers) {
         this.reset();
-      }
-
-      if (unit === TO_ENGLISH_SUFFIX && translationWay !== RUSSIAN_TO_ENGLISH) {
-        switchToEnglish();
-      }
-
-      if (unit === TO_RUSSIAN_SUFFIX && translationWay !== ENGLISH_TO_RUSSIAN) {
-        switchToRussian();
       }
 
       return (
