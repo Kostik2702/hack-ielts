@@ -220,7 +220,6 @@ function* setActualTranslationWay(unit, translationWay) {
 function* runExerciseSaga() {
   yield put({ type: UPDATE_LOADER, payload: { loading: true } });
 
-  yield finishIfExerciseInProgressSaga();
   const words = yield select(state => state.translator.words);
   const word = yield getRandomWordSaga(words);
   const translationsList = yield prepareTranslationsSaga(words, word);
@@ -244,6 +243,7 @@ export function* getDataSaga(unit) {
 
   yield put({ type: UPDATE_STATE, payload: { words: wordsList } });
   yield put({ type: UPDATE_LOADER, payload: { loading: false } });
+  yield finishIfExerciseInProgressSaga();
   yield runExerciseSaga();
 }
 
