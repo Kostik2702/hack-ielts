@@ -8,6 +8,7 @@ import {
   runExercise,
   updateState,
   checkResult,
+  finishExercise,
 } from './wordTranslator.duck';
 
 const mapStateToProps = state => ({
@@ -21,6 +22,7 @@ const mapStateToProps = state => ({
   showMessage: state.translator.showMessage,
   showExercise: state.translator.showExercise,
   showAnswers: state.translator.showAnswers,
+  translationWay: state.translator.translationWay,
 });
 
 function mapActionsToProps(dispatch) {
@@ -31,6 +33,7 @@ function mapActionsToProps(dispatch) {
         runExercise,
         updateState,
         checkResult,
+        finishExercise,
       }, dispatch,
     ),
   };
@@ -39,7 +42,8 @@ function mapActionsToProps(dispatch) {
 @connect(mapStateToProps, mapActionsToProps)
 class WordTranslatorContainer extends PureComponent {
   componentDidMount() {
-    this.props.actions.getTranslationsData();
+    const { unit } = this.props.match.params;
+    this.props.actions.getTranslationsData(unit);
   }
 
   render() {
