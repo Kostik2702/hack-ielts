@@ -25,12 +25,6 @@ const mapStateToProps = state => ({
   translationWay: state.translator.translationWay,
 });
 
-const TO_RUSSIAN_SUFFIX = 'russian';
-const TO_ENGLISH_SUFFIX = 'english';
-
-const ENGLISH_TO_RUSSIAN = true;
-const RUSSIAN_TO_ENGLISH = false;
-
 function mapActionsToProps(dispatch) {
   return {
     actions: bindActionCreators(

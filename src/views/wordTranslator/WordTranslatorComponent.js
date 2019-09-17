@@ -28,8 +28,6 @@ class WordTranslatorComponent extends PureComponent {
     };
 
     render() {
-      const translationNumber = NO_TRANSLATION;
-      const { unit } = this.props.match.params;
       const {
         exerciseWord,
         translations,
