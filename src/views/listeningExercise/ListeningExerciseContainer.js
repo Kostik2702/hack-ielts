@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
   recordingAudio: state.listeningExercise.recordingAudio,
   exerciseData: state.listeningExercise.exerciseData,
   completeSentenceFinished: state.listeningExercise.completeSentenceFinished,
+  completeSentenceStarted: state.listeningExercise.completeSentenceStarted,
   colorAnswers: state.listeningExercise.colorAnswers,
 });
 

@@ -36,7 +36,7 @@ class CompleteSentenceExerciseComponent extends React.PureComponent {
             (colorAnswers ? 'CompleteSentenceExerciseComponent__title--correct' : ''),
           )}
           >
-            {colorAnswers ? 'Sentences finished correctly' : 'Complete this sentences'}
+            {colorAnswers ? 'Sentences completed ' : 'Complete this sentences'}
           </h2>
           <br />
           {sentencesToComplete}

@@ -13,6 +13,7 @@ class ListeningExerciseComponent extends React.PureComponent {
       recordingAudio,
       exerciseData,
       completeSentenceFinished,
+      completeSentenceStarted,
       run,
       colorAnswers,
       checkAnswer,
@@ -31,12 +32,13 @@ class ListeningExerciseComponent extends React.PureComponent {
               {recordingAudio
                 ? <AudioPlayerComponent {...this.props} /> : ''
                   }
-              {isAnswersAllowed && !completeSentenceFinished
+              {completeSentenceStarted && !completeSentenceFinished
                 ? (
                   <CompleteSentenceExerciseComponent
                     checkAnswer={checkAnswer}
                     questions={exerciseData.completeSentenceQuestions}
                     colorAnswers={colorAnswers}
+                    isAnswersAllowed={isAnswersAllowed}
                   />
                 ) : '' }
             </div>
