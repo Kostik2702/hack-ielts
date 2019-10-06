@@ -10,7 +10,7 @@ class CompleteSentenceAnswerComponent extends React.PureComponent {
 
   handleAnswer = (event) => {
     const id = this.props.questionId;
-    const answer = `${this.props.question} ${event.target.value}`;
+    const answer = `${this.props.questionLeftSide}${event.target.value}${this.props.questionRightSide}`;
     const callback = this.props.changeAction(answer, id);
     if (callback.payload.isAnswerCorrect) {
       this.setState({ correct: true, wrong: false });
@@ -21,19 +21,18 @@ class CompleteSentenceAnswerComponent extends React.PureComponent {
 
   render() {
     const {
-      question, changeAction, questionId,
+      questionLeftSide, questionRightSide, changeAction, questionId,
     } = this.props;
 
     return (
       <div className="CompleteSentenceAnswer">
         <div className="CompleteSentenceAnswer__displayedText">
-          <span className={cn('CompleteSentenceAnswer__displayedText__textBox',
+          <div className={cn('CompleteSentenceAnswer__displayedText__textBox',
             (this.state.wrong ? 'CompleteSentenceAnswer__displayedText__textBox--wrong' : ''),
             (this.state.correct ? 'CompleteSentenceAnswer__displayedText__textBox--correct' : ''))}
           >
-            {question}
-          </span>
-          {' '}
+            {questionLeftSide}
+          </div>
           <input
             className={cn('CompleteSentenceAnswer__answer',
               (this.state.wrong ? 'CompleteSentenceAnswer__answer--wrong' : ''),
@@ -41,8 +40,13 @@ class CompleteSentenceAnswerComponent extends React.PureComponent {
             type="text"
             onChange={this.handleAnswer}
           />
+          <div className={cn('CompleteSentenceAnswer__displayedText__textBox',
+            (this.state.wrong ? 'CompleteSentenceAnswer__displayedText__textBox--wrong' : ''),
+            (this.state.correct ? 'CompleteSentenceAnswer__displayedText__textBox--correct' : ''))}
+          >
+            {questionRightSide}
+          </div>
         </div>
-
         <br />
       </div>
     );

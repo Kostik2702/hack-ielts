@@ -21,8 +21,9 @@ class CompleteSentenceExerciseComponent extends React.PureComponent {
       const sentencesToComplete = questions
         .map(question => (
           <CompleteSentenceAnswerComponent
-            key={question.displayedText}
-            question={question.displayedText}
+            key={question.id}
+            questionLeftSide={question.displayedTextLeftSide}
+            questionRightSide={question.displayedTextRightSide}
             changeAction={this.checkAnswerAction}
             questionId={question.id}
           />

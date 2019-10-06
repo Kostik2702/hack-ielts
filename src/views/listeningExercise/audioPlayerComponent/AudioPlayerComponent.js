@@ -53,7 +53,7 @@ class AudioPlayerComponent extends React.PureComponent {
               </div>
             )
             : (
-              <TranslatorButton action={this.handleShowText} label="Show translation text" />
+              <TranslatorButton action={this.handleShowText} label="Show text" />
             )
             }
 

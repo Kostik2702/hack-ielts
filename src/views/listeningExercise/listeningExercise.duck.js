@@ -65,7 +65,8 @@ const EXERCISE_DATA_MOCK = {
       id: 1,
       wrong: false,
       correct: false,
-      displayedText: 'Jess worked with every nationality of',
+      displayedTextLeftSide: 'Jess worked with every nationality of ',
+      displayedTextRightSide: '',
       expectedText: 'Jess worked with every nationality of English learners',
       actualAnswer: '',
     },
@@ -75,8 +76,20 @@ const EXERCISE_DATA_MOCK = {
       wrong: false,
       correct: false,
       answerStatus: false,
-      displayedText: 'She had to correct their mistakes million times while she was in',
+      displayedTextLeftSide: 'She had to correct their mistakes million times while she was in',
+      displayedTextRightSide: '',
       expectedText: 'She had to correct their mistakes million times while she was in Hungary',
+      actualAnswer: '',
+    },
+
+    {
+      id: 3,
+      wrong: false,
+      correct: false,
+      answerStatus: false,
+      displayedTextLeftSide: 'This is a test question. You should write the test ',
+      displayedTextRightSide: ' here!',
+      expectedText: 'This is a test question. You should write the test answer here!',
       actualAnswer: '',
     },
   ],
@@ -182,8 +195,10 @@ function* checkIsCompleteSentenceExerciseFinishedSaga() {
   }
 }
 
+
 function* checkCompleteSentenceAnswerSaga(answer) {
   const filter = element => element.id === answer.payload.actualId;
+  const callback = answer;
   const questions = yield select(
     state => state.listeningExercise.exerciseData.completeSentenceQuestions,
   );
@@ -191,40 +206,21 @@ function* checkCompleteSentenceAnswerSaga(answer) {
   const currentQuestionIndex = questions.findIndex(filter);
 
   currentQuestion.actualAnswer = answer.payload.actualAnswer;
-  currentQuestion.correct = true;// incorrect. will be changed in future
 
-  questions[currentQuestionIndex] = currentQuestion;
-  yield updateCompleteSentenceSaga(questions);
-  const actualAnswer = answer;
-  actualAnswer.payload.isAnswerCorrect = true;
-  yield checkIsCompleteSentenceExerciseFinishedSaga();
-}
-
-/* function* checkCompleteSentenceAnswerSaga(answer) {
-  const filter = element => element.id === answer.payload.actualId;
-  const questions = yield select(
-    state => state.listeningExercise.exerciseData.completeSentenceQuestions,
-  );
-  const currentQuestion = questions.find(filter);
-  const currentQuestionIndex = questions.findIndex(filter);
-  let isAnswerCorrect = false;
-
-  if (answer.payload.actualAnswer === currentQuestion.expectedText) {
+  if (currentQuestion.expectedText === answer.payload.actualAnswer) {
+    callback.payload.isAnswerCorrect = true;
     currentQuestion.wrong = false;
     currentQuestion.correct = true;
-    isAnswerCorrect = true;
   } else {
+    callback.payload.isAnswerCorrect = false;
     currentQuestion.wrong = true;
     currentQuestion.correct = false;
-    isAnswerCorrect = false;
   }
 
   questions[currentQuestionIndex] = currentQuestion;
   yield updateCompleteSentenceSaga(questions);
-  const actualAnswer = answer;
-  actualAnswer.payload.isAnswerCorrect = isAnswerCorrect;
   yield checkIsCompleteSentenceExerciseFinishedSaga();
-} */
+}
 
 function* finishIfInProcessSaga() {
   const exerciseStarted = yield select(state => state.listeningExercise.exerciseStarted);
