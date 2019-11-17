@@ -24,7 +24,7 @@ class HeaderComponent extends PureComponent {
             <MenuButton label="Reading" />
           </Link>
 
-          <Link className="Header__link" to="/listening">
+          <Link className="Header__link" to="/audition">
             <MenuButton label="Listening" />
           </Link>
 

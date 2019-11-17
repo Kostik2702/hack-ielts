@@ -1,0 +1,50 @@
+@import '../../../variables';
+
+.AudioPlayerComponent {
+  width:100%;
+  min-height:300px;
+  margin: $margin-center;
+  text-align: center;
+
+  &__recorder {
+    width:100%;
+    height:25px;
+  }
+
+  &__translationText {
+    font-family: $font;
+    font-size: 16px;
+    padding: 15px;
+    width: 80%;
+    margin:0 auto;
+    min-height: 0px;
+    display: block;
+    content: "";
+    clear: both;
+    white-space: pre-wrap!important;
+
+    text-align: left;
+  }
+
+  &__image {
+    padding: 15px;
+    overflow: hidden;
+    width: 200px;
+    min-height:50px;
+    margin: 0 auto;
+
+    &__text {
+      text-align: center;
+      font-weight: bolder;
+      font-family: $font;
+      font-size: 23px;
+      color: #37383c;
+    }
+  }
+
+  &__image img {
+    width: 100%;
+    height:auto;
+  }
+}
+

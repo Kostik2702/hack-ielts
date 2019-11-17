@@ -1,0 +1,50 @@
+@import '../../variables';
+
+.ListeningExerciseComponent {
+  width: 700px;
+  min-height: 100px;
+  margin: $margin-center;
+  border: 2px solid rgba(55, 56, 60, 0.16);
+  border-radius: 4px;
+  display: block;
+  clear: both;
+  content: "";
+  padding-bottom: 25px;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+
+  &--correct {
+    border-color: forestgreen;
+  }
+
+  &__startButtonBox {
+    margin: $margin-center;
+    width: 400px;
+    height: 75px;
+    text-align: center;
+  }
+
+  &__exercise {
+    width: 100%;
+    min-height: 200px;
+    text-align: center;
+    margin: $margin-center;
+
+    &__title {
+      border: 1px solid #ccc;
+      width: 75%;
+      margin: 0 auto;
+      border-radius: 5px;
+      padding: 5px;
+      background-color: #AA3939 !important;
+      color: azure;
+
+      &--correct {
+        background-color: #eef0f5 !important;
+        color: forestgreen;
+      }
+    }
+  }
+}

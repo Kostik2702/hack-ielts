@@ -1,0 +1,57 @@
+@import '../../../variables';
+
+.CompleteSentenceAnswer {
+  width: 95%;
+  margin: 25px auto;
+  min-height: 25px;
+  padding-top: 25px;
+  clear: both;
+  display: block;
+  content: "";
+  padding-bottom: 15px;
+
+  &__displayedText {
+    text-align: left;
+    min-height: 25px;
+    width:100%;
+    float: left;
+    font-family: $font;
+    margin:0;
+    position: relative;
+    line-height: 25px;
+
+    &__textBox {
+      min-height: 25px;
+      padding: 5px;
+      float: left;
+      font-family: $font;
+
+      &--wrong {
+        color: #801515;
+      }
+
+      &--correct {
+        color: forestgreen;
+      }
+    }
+  }
+
+  &__answer {
+    min-height: 25px;
+    padding: 5px;
+    float: left;
+    font-family: $font;
+    border-top:none;
+    border-left:none;
+    border-right: none;
+    border-bottom: 1px solid #C0C0C0;
+
+    &--wrong {
+      border-color: #801515;
+    }
+
+    &--correct {
+      border-color: forestgreen;
+    }
+  }
+}
